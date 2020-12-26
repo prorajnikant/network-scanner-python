@@ -1,7 +1,7 @@
 #!usr/bin/evn python3
 import nmap
 import argparse
-
+import socket
 
 def nmap_scanner(ip,port_range):
 
@@ -20,7 +20,15 @@ def nmap_scanner(ip,port_range):
 
 			for port in lport:
 				print(f"Port : {port}\tState : {nmScan[host][protocol][port]['state']}")
+def banner_grabbing(host,port):
 
+	sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #TCP
+
+	sock.connect((host,port))
+	sock.send('GET HTTP/1.1 \r\n')
+
+	ret = sock.recv(1024)
+	print ('[+]' + str(ret))
 
 def main():
 	#initialize the port scanner
@@ -40,6 +48,8 @@ def main():
 		print(f"Scanning : {host} - {port}")
 
 	nmap_scanner(host,port)
+	banner_grabbing(host,port)
+
 
 if __name__ == '__main__':
 	main()
