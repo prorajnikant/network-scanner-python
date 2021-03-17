@@ -1,2 +1,1 @@
 python-nmap='0.6.1'
-https://drive.google.com/drive/folders/1JnS-ouQ-rxvZ6xOcz_a61Nikk2KVEaya?usp=sharing
